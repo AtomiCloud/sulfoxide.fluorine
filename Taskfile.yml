@@ -1,0 +1,36 @@
+version: "3"
+
+env:
+  VELERO_PLUGIN_VERSION: v1.7.1
+  VELERO_BUCKET: suicune-systems-backup-platform-bucket
+  VELERO_SECRET_FILE: ./secret
+  VELERO_REGION: APAC
+  VELERO_S3_URL: https://177aa484a66427793543c5e958f8d020.r2.cloudflarestorage.com
+
+tasks:
+  # Utility
+  start:cluster:
+    desc: Starts the playground cluster to test helm charts
+    cmds:
+      - ./scripts/local/create-k3d-cluster.sh
+
+  stop:cluster:
+    desc: Destroys the playground cluster to test helm charts
+    cmds:
+      - ./scripts/local/delete-k3d-cluster.sh
+
+  install:
+    desc: Install velero
+    cmds:
+      - >-
+        velero install
+        --provider aws
+        --plugins velero/velero-plugin-for-aws:{{.VELERO_PLUGIN_VERSION}}
+        --bucket {{.VELERO_BUCKET}}
+        --secret-file {{.VELERO_SECRET_FILE}}
+        --use-volume-snapshots=false
+        --backup-location-config region={{.VELERO_REGION}},s3ForcePathStyle="true",s3Url={{.VELERO_S3_URL}}
+  migrate:
+    desc: Migrate cluster
+    cmds:
+      - ./scripts/migrate.sh {{.CLI_ARGS}}
