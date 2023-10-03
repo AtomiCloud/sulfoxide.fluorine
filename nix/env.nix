@@ -21,6 +21,8 @@ with packages;
   ];
 
   main = [
+    velero
+    doppler
   ];
 
   lint = [

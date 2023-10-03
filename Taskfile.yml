@@ -2,10 +2,18 @@ version: "3"
 
 env:
   VELERO_PLUGIN_VERSION: v1.7.1
-  VELERO_BUCKET: suicune-systems-backup-platform-bucket
-  VELERO_SECRET_FILE: ./secret
+  PLATFORM: sulfoxide
+  SERVICE: fluorine
+  MODULE: bucket
   VELERO_REGION: APAC
-  VELERO_S3_URL: https://177aa484a66427793543c5e958f8d020.r2.cloudflarestorage.com
+
+includes:
+  setup: tasks/Taskfile.setup.yaml
+  velero:suicune:
+    taskfile: tasks/Taskfile.velero.yaml
+    vars:
+      LANDSCAPE: suicune
+      VELERO_S3_URL: https://177aa484a66427793543c5e958f8d020.r2.cloudflarestorage.com
 
 tasks:
   # Utility

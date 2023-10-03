@@ -27,6 +27,8 @@ let
           git
           jq
           yq-go
+          velero
+          doppler
 
           nodejs_20
 

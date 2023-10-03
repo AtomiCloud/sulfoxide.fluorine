@@ -1,0 +1,14 @@
+version: "3"
+
+tasks:
+  install:
+    desc: Install velero for a specific landscape
+    cmds:
+      - >-
+        velero install
+        --provider aws
+        --plugins velero/velero-plugin-for-aws:{{.VELERO_PLUGIN_VERSION}}
+        --bucket {{.LANDSCAPE}}-{{.PLATFORM}}-{{.SERVICE}}-{{.MODULE}}
+        --secret-file {{.LANDSCAPE}}.secret
+        --use-volume-snapshots=false
+        --backup-location-config region={{.VELERO_REGION}},s3ForcePathStyle="true",s3Url={{.VELERO_S3_URL}}

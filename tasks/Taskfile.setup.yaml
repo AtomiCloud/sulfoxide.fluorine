@@ -1,0 +1,20 @@
+version: "3"
+
+tasks:
+  default:
+    desc: Setup the repository by syncing secrets
+    cmds:
+      - ./scripts/local/secrets.sh
+      - task: suicune:secret
+  secret:
+    desc: Download secrets
+    internal: true
+    cmds:
+      - doppler secrets substitute secret.tpl -p sulfoxide-fluorine -c "{{.LANDSCAPE}}" > "{{.LANDSCAPE}}.secret"
+
+  suicune:secret:
+    desc: Download secrets for suicune
+    cmds:
+      - task: secret
+        vars:
+          LANDSCAPE: suicune
