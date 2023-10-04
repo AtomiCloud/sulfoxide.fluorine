@@ -27,17 +27,6 @@ tasks:
     cmds:
       - ./scripts/local/delete-k3d-cluster.sh
 
-  install:
-    desc: Install velero
-    cmds:
-      - >-
-        velero install
-        --provider aws
-        --plugins velero/velero-plugin-for-aws:{{.VELERO_PLUGIN_VERSION}}
-        --bucket {{.VELERO_BUCKET}}
-        --secret-file {{.VELERO_SECRET_FILE}}
-        --use-volume-snapshots=false
-        --backup-location-config region={{.VELERO_REGION}},s3ForcePathStyle="true",s3Url={{.VELERO_S3_URL}}
   migrate:
     desc: Migrate cluster
     cmds:
