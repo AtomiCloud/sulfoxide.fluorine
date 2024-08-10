@@ -4,6 +4,7 @@ with env;
   default = pkgs.mkShell {
     buildInputs = system ++ main ++ dev ++ env.lint ++ infra;
     inherit shellHook;
+    INFISICAL_DISABLE_UPDATE_CHECK=true;
   };
 
   ci = pkgs.mkShell {

@@ -12,6 +12,7 @@ with packages;
   dev = [
     pls
     git
+    gomplate
   ];
 
   infra = [
@@ -22,7 +23,7 @@ with packages;
 
   main = [
     velero
-    doppler
+    infisical
   ];
 
   lint = [

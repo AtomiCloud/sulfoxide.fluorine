@@ -10,7 +10,7 @@ tasks:
     desc: Download secrets
     internal: true
     cmds:
-      - doppler secrets substitute secret.tpl -p sulfoxide-fluorine -c "{{.LANDSCAPE}}" > "{{.LANDSCAPE}}.secret"
+      - infisical run --env={{.LANDSCAPE}} -- gomplate -f ./secret.tpl > "{{.LANDSCAPE}}.secret"
 
   suicune:secret:
     desc: Download secrets for suicune
