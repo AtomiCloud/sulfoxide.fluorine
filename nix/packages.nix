@@ -10,7 +10,7 @@ let
           sg;
       }
     );
-    p240810 = (
+    pkgs240810 = (
       with pkgs-240810;
       {
         inherit
@@ -42,4 +42,4 @@ let
 in
 with all;
 atomipkgs //
-p240810
+pkgs240810
