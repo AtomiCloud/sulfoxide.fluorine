@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 tasks:
   install:
@@ -12,3 +12,13 @@ tasks:
         --secret-file {{.LANDSCAPE}}.secret
         --use-volume-snapshots=false
         --backup-location-config region={{.VELERO_REGION}},s3ForcePathStyle="true",s3Url={{.VELERO_S3_URL}}
+        {{.CLI_ARGS}}
+  schedule:
+    desc: Schedule a backup
+    cmds:
+      - >-
+        velero create
+        schedule "{{.LANDSCAPE}}"
+        --schedule "@every 6h"
+        --ttl 720h0m0s
+        {{.CLI_ARGS}}
